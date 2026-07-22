@@ -2,7 +2,7 @@ import { createElement, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
-  ArrowUpRight, BookOpen, ChevronDown, Disc3, Github,
+  ArrowUpRight, BookOpen, ChevronDown, Disc3,
   GraduationCap, Menu, Moon, Search, Sparkles, Sun, X,
 } from "lucide-react";
 
@@ -280,7 +280,7 @@ export default function App() {
           <div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 md:flex-row md:items-end">
             <div><div className="text-xs font-bold uppercase tracking-[.25em]">Thanks for visiting</div><div className="mt-4 text-5xl font-black tracking-tight md:text-7xl">また、どこかで。</div></div>
             <div className="flex flex-col items-start gap-5 md:items-end">
-              <ExternalLink href="https://github.com/nulllyrics" className="flex items-center gap-2 rounded-full border border-[#04110f]/20 px-4 py-2 text-xs font-bold transition hover:bg-[#04110f] hover:text-teal-300"><Github size={15} />GitHub<ArrowUpRight size={14} /></ExternalLink>
+              <ExternalLink href="https://github.com/nulllyrics" className="flex items-center gap-2 rounded-full border border-[#04110f]/20 px-4 py-2 text-xs font-bold transition hover:bg-[#04110f] hover:text-teal-300">GitHub<ArrowUpRight size={14} /></ExternalLink>
               <div className="text-xs leading-6 opacity-70 md:text-right">© 2026 SHUYU AIBA<br />Approaching omniscience.</div>
             </div>
           </div>
