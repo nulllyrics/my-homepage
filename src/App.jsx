@@ -159,8 +159,8 @@ const universityItems = [
       {
         title: "ゼミ資料",
         description: "ゼミ発表用PDFや配布資料。",
-        url: `${import.meta.env.BASE_URL}public/works/pdf/works/Lepper_et_al_1973_notebooklm.pptx`,
-        href: "public/works/pdf/works/Lepper_et_al_1973_notebooklm.pptx",
+        url: `${import.meta.env.BASE_URL}works/pdf/works/Lepper_et_al_1973_notebooklm.pptx`,
+        href: "works/pdf/works/Lepper_et_al_1973_notebooklm.pptx",
       },
     ],
   },
