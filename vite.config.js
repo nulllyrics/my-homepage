@@ -8,5 +8,5 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  base: "/sibashuyu/",
+  base: "/my-homepage/",
 });
