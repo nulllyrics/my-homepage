@@ -1,6 +1,11 @@
 import { createElement, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useSpring,
+} from "framer-motion";
 import {
   ArrowUpRight,
   BookOpen,
@@ -121,29 +126,35 @@ const works = [
 ];
 
 const study = [
-  { subject: "位相", value: 62, text: "大学数学" },
-  { subject: "Web", value: 28, text: "HTML / CSS / JavaScript / React" },
-  { subject: "Music", value: 22, text: "音楽鑑賞・知識の記録" },
+  {
+    subject: "位相",
+    value: 62,
+    text: "大学数学",
+  },
+  {
+    subject: "Web",
+    value: 28,
+    text: "HTML / CSS / JavaScript / React",
+  },
+  {
+    subject: "Music",
+    value: 22,
+    text: "音楽鑑賞・知識の記録",
+  },
 ];
 
-/*
-  OneDriveの共有リンクは、該当するfiles配列へ追加します。
-
-  例:
-  files: [
-    {
-      title: "認識論ゼミ資料",
-      description: "大学アカウントでのログインが必要です。",
-      url: "ここにOneDriveの共有リンク",
-    },
-  ],
-*/
 const universityItems = [
   {
     title: "ホモロジー",
-    desc: "ホモロジー",
+    desc: "ホモロジー群の計算問題と学習記録。",
     icon: FileText,
-    url: "https://akitacitm-my.sharepoint.com/:w:/r/personal/s1524201_s_akita-u_ac_jp/Documents/homology.docx?d=w93e158a1661643b291ab24aea7e265db&csf=1&web=1&e=CIFYQu",
+    files: [
+      {
+        title: "ホモロジー群の計算 精選100問",
+        description: "OneDrive上のWord文書を開きます。",
+        url: "https://akitacitm-my.sharepoint.com/:w:/r/personal/s1524201_s_akita-u_ac_jp/Documents/homology.docx?d=w93e158a1661643b291ab24aea7e265db&csf=1&web=1&e=CIFYQu",
+      },
+    ],
   },
   {
     title: "ゼミ資料",
@@ -267,7 +278,10 @@ export default function App() {
     };
 
     window.addEventListener("pointermove", moveCursorLight);
-    return () => window.removeEventListener("pointermove", moveCursorLight);
+
+    return () => {
+      window.removeEventListener("pointermove", moveCursorLight);
+    };
   }, []);
 
   useEffect(() => {
@@ -278,7 +292,10 @@ export default function App() {
     };
 
     window.addEventListener("keydown", closeMenuWithEscape);
-    return () => window.removeEventListener("keydown", closeMenuWithEscape);
+
+    return () => {
+      window.removeEventListener("keydown", closeMenuWithEscape);
+    };
   }, []);
 
   const filteredBooks = useMemo(() => {
@@ -289,7 +306,13 @@ export default function App() {
     }
 
     return books.filter((book) =>
-      [book.title, book.author, book.tag, book.status, book.note]
+      [
+        book.title,
+        book.author,
+        book.tag,
+        book.status,
+        book.note,
+      ]
         .join(" ")
         .toLowerCase()
         .includes(normalizedQuery),
@@ -297,7 +320,10 @@ export default function App() {
   }, [query]);
 
   const jump = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+
     setMenu(false);
   };
 
@@ -314,7 +340,9 @@ export default function App() {
         setUniversityUnlocked(true);
         setUniversityPassword("");
       } else {
-        setUniversityError("答えが違います。もう一度確認してください。");
+        setUniversityError(
+          "答えが違います。もう一度確認してください。",
+        );
       }
     } catch {
       setUniversityError(
@@ -336,8 +364,15 @@ export default function App() {
     <div className={dark ? "dark" : ""}>
       <div className="min-h-screen overflow-hidden bg-[#f1f5f3] text-neutral-950 transition-colors duration-500 dark:bg-[#080d10] dark:text-[#edfdf9]">
         <style>{`
-          html { scroll-behavior: smooth; }
-          ::selection { color: #04110f; background: #2dd4bf; }
+          html {
+            scroll-behavior: smooth;
+          }
+
+          ::selection {
+            color: #04110f;
+            background: #2dd4bf;
+          }
+
           .grain::before {
             content: "";
             position: fixed;
@@ -347,13 +382,16 @@ export default function App() {
             opacity: .045;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
           }
+
           .glow {
-            background: radial-gradient(
-              360px circle at var(--mx, 50%) var(--my, 20%),
-              rgba(45, 212, 191, .16),
-              transparent 72%
-            );
+            background:
+              radial-gradient(
+                360px circle at var(--mx, 50%) var(--my, 20%),
+                rgba(45, 212, 191, .16),
+                transparent 72%
+              );
           }
+
           .outline-text {
             color: transparent;
             -webkit-text-stroke: 1px currentColor;
@@ -379,6 +417,7 @@ export default function App() {
               <span className="grid h-7 w-7 place-items-center rounded-full bg-teal-400 text-xs text-[#04110f] shadow-[0_0_24px_rgba(45,212,191,.35)]">
                 S
               </span>
+
               <span>SHUYU AIBA</span>
             </button>
 
@@ -414,7 +453,11 @@ export default function App() {
 
               <button
                 type="button"
-                aria-label={menu ? "メニューを閉じる" : "メニューを開く"}
+                aria-label={
+                  menu
+                    ? "メニューを閉じる"
+                    : "メニューを開く"
+                }
                 aria-expanded={menu}
                 onClick={() => setMenu((value) => !value)}
                 className="grid h-9 w-9 place-items-center rounded-full border border-black/10 md:hidden dark:border-white/15"
@@ -428,9 +471,21 @@ export default function App() {
         <AnimatePresence>
           {menu && (
             <motion.div
-              initial={{ opacity: 0, y: -12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              initial={{
+                opacity: 0,
+                y: -12,
+                scale: 0.98,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -12,
+                scale: 0.98,
+              }}
               className="fixed inset-x-4 top-20 z-[60] rounded-3xl border border-black/10 bg-white/95 p-4 shadow-2xl backdrop-blur dark:border-white/10 dark:bg-neutral-900/95"
             >
               {nav.map(([label, id], index) => (
@@ -443,6 +498,7 @@ export default function App() {
                   <span>
                     0{index + 1}　{label}
                   </span>
+
                   <ArrowUpRight size={16} />
                 </button>
               ))}
@@ -457,12 +513,23 @@ export default function App() {
           >
             <div className="mx-auto w-full max-w-7xl">
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{
+                  opacity: 0,
+                  y: 24,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.8,
+                }}
               >
                 <div className="mb-8 flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-neutral-500">
-                  <Sparkles size={14} className="text-teal-400" />
+                  <Sparkles
+                    size={14}
+                    className="text-teal-400"
+                  />
                   Personal archive / 2026
                 </div>
 
@@ -473,6 +540,7 @@ export default function App() {
                 <h1 className="max-w-6xl text-[15vw] font-black leading-[.82] tracking-[-.075em] md:text-[9rem]">
                   全知に、
                   <br />
+
                   <span className="outline-text text-neutral-900 dark:text-white">
                     近づきたい。
                   </span>
@@ -492,6 +560,7 @@ export default function App() {
                   className="group flex items-center gap-3 text-sm font-bold"
                 >
                   見てみる
+
                   <span className="grid h-12 w-12 place-items-center rounded-full bg-teal-400 text-[#04110f] shadow-[0_0_30px_rgba(45,212,191,.25)] transition group-hover:translate-y-1">
                     <ChevronDown />
                   </span>
@@ -525,8 +594,12 @@ export default function App() {
                       <span className="text-xs text-teal-500 dark:text-teal-300">
                         0{index + 1}
                       </span>
-                      <span className="text-2xl font-bold">{label}</span>
+
+                      <span className="text-2xl font-bold">
+                        {label}
+                      </span>
                     </span>
+
                     <ArrowUpRight className="transition group-hover:rotate-45 group-hover:text-teal-400" />
                   </motion.button>
                 ))}
@@ -534,14 +607,20 @@ export default function App() {
             </div>
           </section>
 
-          <section id="about" className="px-5 py-24 md:px-8 md:py-40">
+          <section
+            id="about"
+            className="px-5 py-24 md:px-8 md:py-40"
+          >
             <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[.85fr_1.15fr]">
-              <SectionTitle eyebrow="About me">自己紹介</SectionTitle>
+              <SectionTitle eyebrow="About me">
+                自己紹介
+              </SectionTitle>
 
               <div>
                 <p className="text-3xl font-bold leading-[1.55] tracking-tight md:text-5xl">
                   全知にはなれなくても、
                   <br />
+
                   <span className="text-teal-500 dark:text-teal-300">
                     昨日より多くを知りたい。
                   </span>
@@ -550,20 +629,25 @@ export default function App() {
                 <p className="mt-10 max-w-2xl leading-8 text-neutral-600 dark:text-neutral-400">
                   こんにちは。相場脩佑です。
                   <br />
-                  大学生として学びながら、音楽、数学、ゲームを中心に、興味を持ったことに触れています。このサイトには、好きなものや制作物、勉強の記録を残していきます。
+                  大学生として学びながら、音楽、数学、ゲームを中心に、
+                  興味を持ったことに触れています。
+                  このサイトには、好きなものや制作物、勉強の記録を残していきます。
                 </p>
 
                 <div className="mt-12 flex flex-wrap gap-3">
-                  {["University Student", "Music", "Mathematics", "Games"].map(
-                    (item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-black/15 px-4 py-2 text-xs transition hover:border-teal-400 hover:bg-teal-400/10 dark:border-white/15"
-                      >
-                        {item}
-                      </span>
-                    ),
-                  )}
+                  {[
+                    "University Student",
+                    "Music",
+                    "Mathematics",
+                    "Games",
+                  ].map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-black/15 px-4 py-2 text-xs transition hover:border-teal-400 hover:bg-teal-400/10 dark:border-white/15"
+                    >
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -603,7 +687,10 @@ export default function App() {
                       >
                         <motion.div
                           animate={{
-                            rotate: selectedArtist === index ? 360 : 0,
+                            rotate:
+                              selectedArtist === index
+                                ? 360
+                                : 0,
                           }}
                           transition={{
                             duration: 10,
@@ -619,12 +706,20 @@ export default function App() {
                       <div className="text-xs tracking-widest text-white/50">
                         {artist.genre}
                       </div>
-                      <h3 className="mt-2 text-2xl font-bold">{artist.name}</h3>
+
+                      <h3 className="mt-2 text-2xl font-bold">
+                        {artist.name}
+                      </h3>
+
                       <p className="mt-3 text-sm leading-6 text-white/60">
                         {artist.note}
                       </p>
+
                       <div className="mt-6 text-xs font-bold text-teal-200">
-                        {selectedArtist === index ? "NOW SELECTED" : "SELECT"} →
+                        {selectedArtist === index
+                          ? "NOW SELECTED"
+                          : "SELECT"}{" "}
+                        →
                       </div>
                     </button>
 
@@ -632,8 +727,12 @@ export default function App() {
                       <div className="text-[10px] font-semibold uppercase tracking-[.2em] text-white/40">
                         Recommended song
                       </div>
+
                       <div className="mt-2 flex items-center justify-between gap-4">
-                        <p className="font-bold text-white">{artist.song}</p>
+                        <p className="font-bold text-white">
+                          {artist.song}
+                        </p>
+
                         <ExternalLink
                           href={artist.url}
                           className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/20 transition hover:border-teal-300 hover:bg-teal-300 hover:text-neutral-950"
@@ -648,7 +747,10 @@ export default function App() {
             </div>
           </section>
 
-          <section id="books" className="px-5 py-24 md:px-8 md:py-40">
+          <section
+            id="books"
+            className="px-5 py-24 md:px-8 md:py-40"
+          >
             <div className="mx-auto max-w-7xl">
               <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
                 <SectionTitle
@@ -660,10 +762,13 @@ export default function App() {
 
                 <label className="mb-12 flex items-center gap-3 rounded-full border border-black/10 px-5 py-3 transition focus-within:border-teal-400 dark:border-white/15">
                   <Search size={16} />
+
                   <input
                     type="search"
                     value={query}
-                    onChange={(event) => setQuery(event.target.value)}
+                    onChange={(event) =>
+                      setQuery(event.target.value)
+                    }
                     placeholder="本を検索"
                     aria-label="本を検索"
                     className="w-40 bg-transparent text-sm outline-none placeholder:text-neutral-400"
@@ -680,20 +785,29 @@ export default function App() {
                     >
                       <div className="flex justify-between gap-4">
                         <BookOpen />
+
                         <div className="flex flex-wrap justify-end gap-2">
                           <span className="rounded-full border border-current px-3 py-1 text-[10px]">
                             {book.tag}
                           </span>
+
                           <span className="rounded-full border border-current px-3 py-1 text-[10px]">
                             {book.status}
                           </span>
                         </div>
                       </div>
+
                       <div className="mt-20 text-xs opacity-50">
                         {book.author}
                       </div>
-                      <h3 className="mt-2 text-2xl font-black">{book.title}</h3>
-                      <p className="mt-3 text-sm opacity-60">{book.note}</p>
+
+                      <h3 className="mt-2 text-2xl font-black">
+                        {book.title}
+                      </h3>
+
+                      <p className="mt-3 text-sm opacity-60">
+                        {book.note}
+                      </p>
                     </article>
                   ))}
                 </div>
@@ -724,15 +838,21 @@ export default function App() {
                       <div className="text-xs text-teal-500 dark:text-teal-300">
                         {work.no}
                       </div>
-                      <h3 className="text-3xl font-bold">{work.title}</h3>
+
+                      <h3 className="text-3xl font-bold">
+                        {work.title}
+                      </h3>
+
                       <div>
                         <div className="text-xs font-bold uppercase tracking-widest text-neutral-400">
                           {work.kind}
                         </div>
+
                         <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
                           {work.desc}
                         </p>
                       </div>
+
                       <div className="grid h-11 w-11 place-items-center rounded-full border border-black/15 transition group-hover:rotate-45 group-hover:border-teal-400 group-hover:bg-teal-400 group-hover:text-[#04110f] dark:border-white/15">
                         <ArrowUpRight size={18} />
                       </div>
@@ -767,7 +887,10 @@ export default function App() {
             </div>
           </section>
 
-          <section id="study" className="px-5 py-24 md:px-8 md:py-40">
+          <section
+            id="study"
+            className="px-5 py-24 md:px-8 md:py-40"
+          >
             <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2">
               <div>
                 <SectionTitle
@@ -776,6 +899,7 @@ export default function App() {
                 >
                   勉強
                 </SectionTitle>
+
                 <GraduationCap
                   size={80}
                   strokeWidth={1}
@@ -788,21 +912,35 @@ export default function App() {
                   <div key={item.subject}>
                     <div className="mb-3 flex items-end justify-between gap-5">
                       <div>
-                        <h3 className="text-2xl font-bold">{item.subject}</h3>
+                        <h3 className="text-2xl font-bold">
+                          {item.subject}
+                        </h3>
+
                         <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
                           {item.text}
                         </p>
                       </div>
+
                       <span className="text-sm font-bold text-teal-600 dark:text-teal-300">
                         {item.value}%
                       </span>
                     </div>
+
                     <div className="h-2 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">
                       <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${item.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: index * 0.15 }}
+                        initial={{
+                          width: 0,
+                        }}
+                        whileInView={{
+                          width: `${item.value}%`,
+                        }}
+                        viewport={{
+                          once: true,
+                        }}
+                        transition={{
+                          duration: 1,
+                          delay: index * 0.15,
+                        }}
                         className="h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-300 shadow-[0_0_18px_rgba(45,212,191,.45)]"
                       />
                     </div>
@@ -817,6 +955,7 @@ export default function App() {
             className="relative overflow-hidden bg-teal-400 px-5 py-24 text-black md:px-8 md:py-40"
           >
             <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(0,0,0,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,.16)_1px,transparent_1px)] [background-size:36px_36px]" />
+
             <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full border border-black/20 shadow-[0_0_100px_rgba(0,0,0,.22)]" />
 
             <div className="relative mx-auto max-w-7xl">
@@ -826,9 +965,11 @@ export default function App() {
                     <span className="h-px w-8 bg-black" />
                     Restricted campus node
                   </div>
+
                   <h2 className="text-4xl font-black tracking-[-.05em] md:text-7xl">
                     大学限定
                   </h2>
+
                   <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-black/65">
                     大学での学習や研究の記録を置いています。
                   </p>
@@ -849,10 +990,15 @@ export default function App() {
               {!universityUnlocked ? (
                 <div className="grid gap-8 border border-black bg-black p-6 text-teal-300 shadow-[12px_12px_0_rgba(0,0,0,.25)] md:grid-cols-[.8fr_1.2fr] md:p-10">
                   <div className="border-b border-teal-300/30 pb-8 md:border-b-0 md:border-r md:pb-0 md:pr-10">
-                    <LockKeyhole size={58} strokeWidth={1.3} />
+                    <LockKeyhole
+                      size={58}
+                      strokeWidth={1.3}
+                    />
+
                     <div className="mt-8 font-mono text-xs uppercase tracking-[.25em] text-teal-300/55">
                       Authorization required
                     </div>
+
                     <p className="mt-4 text-2xl font-black leading-snug">
                       この領域へのアクセスには認証が必要です。
                     </p>
@@ -868,6 +1014,7 @@ export default function App() {
                     >
                       私の学籍番号は？
                     </label>
+
                     <input
                       id="university-password"
                       type="password"
@@ -881,7 +1028,9 @@ export default function App() {
                       className="mt-4 border border-teal-300/50 bg-transparent px-4 py-4 font-mono text-lg tracking-[.3em] text-teal-200 outline-none transition placeholder:text-teal-300/20 focus:border-teal-200 focus:shadow-[0_0_24px_rgba(45,212,191,.22)]"
                       placeholder="•••••••"
                       aria-describedby={
-                        universityError ? "university-error" : undefined
+                        universityError
+                          ? "university-error"
+                          : undefined
                       }
                     />
 
@@ -898,23 +1047,33 @@ export default function App() {
                     <button
                       type="submit"
                       disabled={
-                        universityLoading || !universityPassword.trim()
+                        universityLoading ||
+                        !universityPassword.trim()
                       }
                       className="mt-5 flex items-center justify-center gap-2 bg-teal-300 px-5 py-4 text-sm font-black uppercase tracking-[.2em] text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       <ShieldCheck size={18} />
-                      {universityLoading ? "認証中..." : "認証して入室"}
+                      {universityLoading
+                        ? "認証中..."
+                        : "認証して入室"}
                     </button>
                   </form>
                 </div>
               ) : (
                 <motion.div
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{
+                    opacity: 0,
+                    y: 18,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
                   className="border border-black bg-black p-6 text-teal-300 shadow-[12px_12px_0_rgba(0,0,0,.25)] md:p-10"
                 >
                   <div className="flex items-center gap-3 border-b border-teal-300/25 pb-6">
                     <ShieldCheck size={24} />
+
                     <p className="text-xl font-black">
                       ようこそ、いろいろ置いとくね
                     </p>
@@ -923,42 +1082,68 @@ export default function App() {
                   <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {universityItems.map((item) => {
                       const Icon = item.icon;
+                      const files = Array.isArray(item.files)
+                        ? item.files.filter(
+                            (file) =>
+                              file &&
+                              typeof file.url === "string" &&
+                              file.url.trim() !== "",
+                          )
+                        : [];
 
                       return (
                         <article
                           key={item.title}
                           className="border border-teal-300/25 p-5"
                         >
-                          <Icon size={25} />
+                          {Icon ? (
+                            <Icon
+                              size={25}
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <FileText
+                              size={25}
+                              aria-hidden="true"
+                            />
+                          )}
+
                           <h3 className="mt-10 text-xl font-black">
                             {item.title}
                           </h3>
+
                           <p className="mt-2 text-sm leading-6 opacity-65">
                             {item.desc}
                           </p>
 
-                          {item.files.length > 0 ? (
+                          {files.length > 0 ? (
                             <div className="mt-6 space-y-3">
-                              {item.files.map((file) => (
+                              {files.map((file, fileIndex) => (
                                 <ExternalLink
-                                  key={`${item.title}-${file.title}`}
+                                  key={`${item.title}-${file.title || fileIndex}`}
                                   href={file.url}
                                   className="group/file block border border-teal-300/25 p-4 transition hover:border-teal-200 hover:bg-teal-300 hover:text-black"
                                 >
                                   <div className="flex items-start justify-between gap-4">
                                     <div>
                                       <div className="font-bold">
-                                        {file.title}
+                                        {file.title || "資料を開く"}
                                       </div>
-                                      <p className="mt-1 text-xs leading-5 opacity-60">
-                                        {file.description}
-                                      </p>
+
+                                      {file.description && (
+                                        <p className="mt-1 text-xs leading-5 opacity-60">
+                                          {file.description}
+                                        </p>
+                                      )}
                                     </div>
+
                                     <ArrowUpRight
                                       size={17}
                                       className="shrink-0 transition group-hover/file:rotate-45"
+                                      aria-hidden="true"
                                     />
                                   </div>
+
                                   <div className="mt-3 font-mono text-[10px] uppercase tracking-[.2em] opacity-50">
                                     Open secure file
                                   </div>
@@ -979,6 +1164,7 @@ export default function App() {
                     <div className="text-[10px] font-black uppercase tracking-[.25em] text-teal-300/55">
                       Research interests
                     </div>
+
                     <div className="mt-4 flex flex-wrap gap-2">
                       {researchInterests.map((interest) => (
                         <span
@@ -1006,6 +1192,7 @@ export default function App() {
               <div className="text-xs font-bold uppercase tracking-[.25em]">
                 Thanks for visiting
               </div>
+
               <div className="mt-4 text-5xl font-black tracking-tight md:text-7xl">
                 また、どこかで。
               </div>
